@@ -29,7 +29,6 @@ public class UserAndVideoService {
         String cacheKey = "users_by_video_" + videoName;
         logger.debug("Checking cache for users with video");
 
-        // Получаем список UserDto из кэша
         @SuppressWarnings("unchecked")
         Optional<List<UserDto>> cachedUserDtos = cacheService.get(cacheKey, List.class)
                 .map(list -> (List<UserDto>) list);
@@ -48,7 +47,6 @@ public class UserAndVideoService {
         if (!userDtos.isEmpty()) {
             logger.debug("Caching users with video");
 
-            // Конвертируем в List<UserDto> для кэширования
             cacheService.put(cacheKey, userDtos, List.class);
         }
 
